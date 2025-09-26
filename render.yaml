@@ -1,8 +1,0 @@
-services:
-  - type: web
-    name: portugues-concursos-hero
-    buildCommand: npm run build
-    staticPublishPath: dist
-    envVars:
-      - key: NODE_VERSION
-        value: 18

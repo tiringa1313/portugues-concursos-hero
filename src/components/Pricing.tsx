@@ -49,8 +49,9 @@ const Pricing = () => {
               ].map((item, idx, arr) => (
                 <div
                   key={item}
-                  className={`flex items-center justify-between px-5 sm:px-6 py-3 text-left bg-white/60 dark:bg-card/60
-                              ${idx < arr.length - 1 ? "border-b border-border/60" : ""}`}
+                  className={`flex items-center justify-between px-5 sm:px-6 py-3 text-left bg-white/60 dark:bg-card/60 ${
+                    idx < arr.length - 1 ? "border-b border-border/60" : ""
+                  }`}
                 >
                   <span className="text-muted-foreground">{item}</span>
                   <span className="text-success font-semibold">✓ Incluído</span>
@@ -58,23 +59,40 @@ const Pricing = () => {
               ))}
             </div>
 
-            {/* CTA */}
-            <a
-              href="https://go.hotmart.com/Q102033011B?ap=13f6"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block"
-            >
+            {/* CTA (button para evitar bloqueio de adblock) */}
+            <div className="block">
               <Button
+                type="button"
+                aria-label="Ir para o checkout"
+                onClick={() =>
+                  window.open(
+                    "https://go.hotmart.com/Q102033011B?ap=13f6",
+                    "_blank",
+                    "noopener,noreferrer"
+                  )
+                }
                 variant="cta"
                 size="xl"
-                className="w-full shadow-[0_10px_30px_rgba(16,185,129,0.35)] hover:shadow-[0_14px_40px_rgba(16,185,129,0.5)] transition-shadow
-                           data-[pulse=true]:animate-pulse"
+                className="relative z-10 w-full shadow-[0_10px_30px_rgba(16,185,129,0.35)] hover:shadow-[0_14px_40px_rgba(16,185,129,0.5)] transition-shadow data-[pulse=true]:animate-pulse"
                 data-pulse="true"
               >
                 Quero minha vaga agora 🚀
               </Button>
-            </a>
+            </div>
+
+            {/* Fallback para quando JS estiver desativado */}
+            <noscript>
+              <p className="mt-2">
+                <a
+                  href="https://go.hotmart.com/Q102033011B?ap=13f6"
+                  target="_blank"
+                  rel="noopener noreferrer nofollow"
+                  className="underline"
+                >
+                  Acessar checkout
+                </a>
+              </p>
+            </noscript>
 
             {/* Micro prova social / confiança */}
             <div className="mt-4 text-xs sm:text-sm text-muted-foreground">

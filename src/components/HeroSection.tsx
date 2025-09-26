@@ -27,12 +27,18 @@ const HeroSection = () => {
               Mais de <span className="font-semibold text-success">59 mil alunos</span> já 
               estudaram com o Prof. Álvaro Ferreira!
             </p>
+<div className="mb-8">
+  <a 
+    href="https://go.hotmart.com/Q102033011B?ap=13f6" 
+    target="_blank" 
+    rel="noopener noreferrer"
+  >
+    <Button variant="hero" size="xl" className="w-full sm:w-auto mb-6">
+      Quero ficar forte em Português
+    </Button>
+  </a>
+</div>
 
-            <div className="mb-8">
-              <Button variant="hero" size="xl" className="w-full sm:w-auto mb-6">
-                Quero ficar forte em Português
-              </Button>
-            </div>
 
             <div className="space-y-3">
               {benefits.map((benefit, index) => (

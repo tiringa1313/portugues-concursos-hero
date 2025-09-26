@@ -7,14 +7,18 @@ import Guarantees from '@/components/Guarantees';
 import Reviews from '@/components/Reviews';
 import Pricing from '@/components/Pricing';
 import Footer from '@/components/Footer';
+import ProfessorSection from '@/components/professorAcademia';
+
 
 const Index = () => {
   return (
     <div className="min-h-screen">
       <Header />
       <HeroSection />
+  
       <SocialProof />
       <CourseContent />
+      <ProfessorSection />  
       <Guarantees />
       <Reviews />
       <Pricing />
@@ -22,5 +26,4 @@ const Index = () => {
     </div>
   );
 };
-
-export default Index;
+export default Index;   // <- **precisa** existir

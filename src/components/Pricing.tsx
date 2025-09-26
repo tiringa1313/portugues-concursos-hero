@@ -73,7 +73,20 @@ const Pricing = () => {
                 }
                 variant="cta"
                 size="xl"
-                className="relative z-10 w-full shadow-[0_10px_30px_rgba(16,185,129,0.35)] hover:shadow-[0_14px_40px_rgba(16,185,129,0.5)] transition-shadow data-[pulse=true]:animate-pulse"
+                className="
+                  relative z-10 w-full rounded-2xl
+                  text-white
+                  bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-600
+                  dark:bg-emerald-500 dark:hover:bg-emerald-400 dark:active:bg-emerald-500 dark:text-white
+                  shadow-[0_10px_30px_rgba(16,185,129,0.35)] hover:shadow-[0_14px_40px_rgba(16,185,129,0.5)]
+                  dark:shadow-[0_10px_30px_rgba(52,211,153,0.35)] dark:hover:shadow-[0_14px_40px_rgba(52,211,153,0.5)]
+                  transition-shadow
+                  focus-visible:outline-none
+                  focus-visible:ring-2 focus-visible:ring-emerald-500
+                  focus-visible:ring-offset-2 focus-visible:ring-offset-white
+                  dark:focus-visible:ring-offset-gray-900
+                  data-[pulse=true]:animate-pulse
+                "
                 data-pulse="true"
               >
                 Quero minha vaga agora 🚀

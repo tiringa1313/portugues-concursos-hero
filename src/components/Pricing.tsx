@@ -3,17 +3,18 @@ import React, { useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 
 const Pricing: React.FC = () => {
-  // Dispara ViewContent quando 50% da seção estiver visível
+  // Ref para observar a seção
   const sectionRef = useRef<HTMLElement | null>(null);
   const firedRef = useRef(false);
 
+  // Dispara ViewContent quando metade da seção aparecer na tela
   useEffect(() => {
-    if (!sectionRef.current || firedRef.current) return;
+    if (!sectionRef.current) return;
 
     const obs = new IntersectionObserver(
       (entries) => {
-        const e = entries[0];
-        if (e.isIntersecting && !firedRef.current) {
+        const entry = entries[0];
+        if (entry.isIntersecting && !firedRef.current) {
           firedRef.current = true;
           if (typeof window !== "undefined" && (window as any).fbq) {
             (window as any).fbq("track", "ViewContent", {
@@ -45,7 +46,7 @@ const Pricing: React.FC = () => {
           </h2>
         </div>
 
-        {/* CARD */}
+        {/* Card de Preço */}
         <div className="relative max-w-2xl mx-auto">
           {/* Selo de Garantia */}
           <div className="absolute -right-3 -top-3 z-10">
@@ -90,13 +91,13 @@ const Pricing: React.FC = () => {
               ))}
             </div>
 
-            {/* CTA */}
+            {/* Botão CTA */}
             <div className="block">
               <Button
                 type="button"
                 aria-label="Ir para o checkout"
                 onClick={() => {
-                  // Evento do Pixel: início de checkout
+                  // Dispara InitiateCheckout
                   if (typeof window !== "undefined" && (window as any).fbq) {
                     (window as any).fbq("track", "InitiateCheckout", {
                       content_name: "Academia de Português",
@@ -105,7 +106,7 @@ const Pricing: React.FC = () => {
                     });
                   }
 
-                  // Abre o checkout Hotmart
+                  // Abre checkout Hotmart
                   window.open(
                     "https://go.hotmart.com/Q102033011B?ap=13f6",
                     "_blank",
@@ -134,7 +135,7 @@ const Pricing: React.FC = () => {
               </Button>
             </div>
 
-            {/* Fallback para quando JS estiver desativado */}
+            {/* Fallback sem JS */}
             <noscript>
               <p className="mt-2">
                 <a
@@ -148,7 +149,7 @@ const Pricing: React.FC = () => {
               </p>
             </noscript>
 
-            {/* Micro prova social / confiança */}
+            {/* Micro prova social */}
             <div className="mt-4 text-xs sm:text-sm text-muted-foreground">
               Mais de <span className="font-semibold text-foreground">59 mil alunos</span> já confiaram •
               Pagamento 100% seguro • Acesso imediato

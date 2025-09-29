@@ -1,10 +1,41 @@
 // src/components/Pricing.tsx
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 
-const Pricing = () => {
+const Pricing: React.FC = () => {
+  // Dispara ViewContent quando 50% da seção estiver visível
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const firedRef = useRef(false);
+
+  useEffect(() => {
+    if (!sectionRef.current || firedRef.current) return;
+
+    const obs = new IntersectionObserver(
+      (entries) => {
+        const e = entries[0];
+        if (e.isIntersecting && !firedRef.current) {
+          firedRef.current = true;
+          if (typeof window !== "undefined" && (window as any).fbq) {
+            (window as any).fbq("track", "ViewContent", {
+              content_name: "Academia de Português",
+              content_category: "Curso",
+            });
+          }
+          obs.disconnect();
+        }
+      },
+      { threshold: 0.5 }
+    );
+
+    obs.observe(sectionRef.current);
+    return () => obs.disconnect();
+  }, []);
+
   return (
-    <section className="py-20 lg:py-28 bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-950">
+    <section
+      ref={sectionRef}
+      className="py-20 lg:py-28 bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-950"
+    >
       <div className="container mx-auto px-4 text-center">
         {/* Headline */}
         <div className="mb-10">
@@ -59,18 +90,28 @@ const Pricing = () => {
               ))}
             </div>
 
-            {/* CTA (button para evitar bloqueio de adblock) */}
+            {/* CTA */}
             <div className="block">
               <Button
                 type="button"
                 aria-label="Ir para o checkout"
-                onClick={() =>
+                onClick={() => {
+                  // Evento do Pixel: início de checkout
+                  if (typeof window !== "undefined" && (window as any).fbq) {
+                    (window as any).fbq("track", "InitiateCheckout", {
+                      content_name: "Academia de Português",
+                      value: 0,
+                      currency: "BRL",
+                    });
+                  }
+
+                  // Abre o checkout Hotmart
                   window.open(
                     "https://go.hotmart.com/Q102033011B?ap=13f6",
                     "_blank",
                     "noopener,noreferrer"
-                  )
-                }
+                  );
+                }}
                 variant="cta"
                 size="xl"
                 className="
